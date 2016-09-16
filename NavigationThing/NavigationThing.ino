@@ -88,11 +88,10 @@ class CompassImp {
     }
 
     void calibrate(CRGB color = {0, 0, 128}) {
-      toneAC(4000, 10, 200);
-      toneAC(3000, 10, 200);
-      toneAC(1000, 10, 200);
+      for(int i = 4; i != 0; i--)
+        toneAC(i * 1000, 10, 200);
       begin();
-      delay(4500);
+      delay(3500);
       unsigned long long t = millis();
       int x_max = 0, x_min = 0;
       int y_max = 0, y_min = 0;
@@ -412,34 +411,6 @@ void setup() {
   delay(200);
   if (waypoints[0].enter_func)
     (*waypoints[0].enter_func)();
-
-  /*while(true) {
-    compass.show(130);
-  }*/
-
-  /*using tim = unsigned long long;
-  int distance = 1000;
-  tim _last_beep = 0;
-  int next_beep;
-  Serial.setTimeout(50);
-  while(true) {
-    if (Serial.available()) {
-      distance = Serial.parseInt();
-      Serial.print("New distance: "); Serial.println(distance);
-    }
-
-    int d = distance;
-    if (d > 1000)
-      d = 1000;
-    if (d < 10)
-      d = 10;
-    next_beep = 33 * sqrt(d) + 20;
-
-    if (millis() - _last_beep > next_beep) {
-      _last_beep = millis();
-      toneAC(4000, 10, 20, true);
-    }
-  }*/
 }
 
 void final_trap() {
